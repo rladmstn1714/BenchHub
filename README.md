@@ -18,7 +18,7 @@
 **Official repository for [BenchHub: A Unified Benchmark Suite for Holistic and Customizable LLM Evaluation](https://arxiv.org/abs/2506.00482).**
 
 
----
+
 
 ## 📌 Overview
 
@@ -31,7 +31,7 @@ It enables efficient dataset handling for **training and evaluation**, providing
 
 This allows users to build **custom benchmarks** tailored to specific needs and conduct **holistic evaluations** of language models.
 
----
+
 
 ## 🔧 Features
 
@@ -40,7 +40,7 @@ This allows users to build **custom benchmarks** tailored to specific needs and 
 - 📊 Ready-to-use evaluation interface
 - 💻 Integration with Hugging Face Hub for ease of use
 
----
+
 
 ### Agent-Based Reformatter
 
