@@ -1,6 +1,32 @@
 # BenchHub
 
-**BenchHub** is a tool designed to help researchers and developers easily load, filter, and process various benchmark datasets. It allows efficient handling of datasets for model training and evaluation, with functionality for filtering based on specific criteria such as subject, skill, and target. This makes it easier to experiment with and analyze datasets tailored to particular needs.
+**Official repository for [BenchHub: A Unified Benchmark Suite for Holistic and Customizable LLM Evaluation](https://arxiv.org/abs/2506.00482).**
+
+[Paper (arXiv)](https://arxiv.org/abs/2506.00482) | [GitHub](https://github.com/rladmstn1714/BenchHub) | [Hugging Face (code & web)](https://huggingface.co/BenchHub)
+
+---
+
+## 📌 Overview
+
+**BenchHub** is a unified benchmark suite designed to help researchers and developers **easily load, filter, and process various LLM benchmark datasets**.
+
+It enables efficient dataset handling for **training and evaluation**, providing flexible filtering capabilities by:
+- **Subject**
+- **Skill**
+- **Target**
+
+This allows users to build **custom benchmarks** tailored to specific needs and conduct **holistic evaluations** of language models.
+
+---
+
+## 🔧 Features
+
+- 🧩 Modular loading of diverse benchmark datasets
+- 🔍 Fine-grained filtering by metadata
+- 📊 Ready-to-use evaluation interface
+- 💻 Integration with Hugging Face Hub for ease of use
+
+---
 
 ### Agent-Based Reformatter
 
@@ -24,4 +50,23 @@ df = load_benchhub(
 )
 ```
 
-This function helps you load datasets, apply necessary filters, and optionally save the processed data for further analysis or training.
+## 📝 Citation
+
+If you use BenchHub in your research, please cite:
+
+```bibtex
+@misc{kim2025benchhub,
+      title={BenchHub: A Unified Benchmark Suite for Holistic and Customizable LLM Evaluation}, 
+      author={Eunsu Kim and Haneul Yoo and Guijin Son and Hitesh Patel and Amit Agarwal and Alice Oh},
+      year={2025},
+      eprint={2506.00482},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2506.00482}, 
+}
+```
+
+## 📫 Contact
+
+For questions or suggestions, please open an [issue](https://github.com/rladmstn1714/BenchHub/issues) or contact the authors at [kes0317@kaist.ac.kr](mailto:kes0317@kaist.ac.kr).
+
