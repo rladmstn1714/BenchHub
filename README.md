@@ -1,4 +1,19 @@
-# BenchHub
+<div align="center">
+  <h1>BenchHub 🧪📚</h1>
+  <p>A Unified Benchmark Suite for Holistic and Customizable LLM Evaluation</p>
+  <p>
+    <a href="https://arxiv.org/abs/2506.00482">
+      <img src="https://img.shields.io/badge/ArXiv-BenchHub-<COLOR>" alt="Paper">
+    </a>
+    <a href="https://github.com/rladmstn1714/BenchHub">
+      <img src="https://img.shields.io/badge/GitHub-Code-blue" alt="GitHub">
+    </a>
+    <a href="https://huggingface.co/BenchHub">
+      <img src="https://img.shields.io/badge/HuggingFace-Web%20Demo-yellow" alt="Hugging Face">
+    </a>
+  </p>
+</div>
+
 
 **Official repository for [BenchHub: A Unified Benchmark Suite for Holistic and Customizable LLM Evaluation](https://arxiv.org/abs/2506.00482).**
 
