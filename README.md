@@ -9,7 +9,7 @@
       <img src="https://img.shields.io/badge/GitHub-Code-blue" alt="GitHub">
     </a>
     <a href="https://huggingface.co/BenchHub">
-      <img src="https://img.shields.io/badge/HuggingFace-Dataset%20Demo-yellow" alt="Hugging Face">
+      <img src="https://img.shields.io/badge/HuggingFace-Dataset&%20Demo-yellow" alt="Hugging Face">
     </a>
   </p>
 </div>
