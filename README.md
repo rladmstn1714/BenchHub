@@ -9,7 +9,7 @@
       <img src="https://img.shields.io/badge/GitHub-Code-blue" alt="GitHub">
     </a>
     <a href="https://huggingface.co/BenchHub">
-      <img src="https://img.shields.io/badge/HuggingFace-Web%20Demo-yellow" alt="Hugging Face">
+      <img src="https://img.shields.io/badge/HuggingFace-Dataset%20Demo-yellow" alt="Hugging Face">
     </a>
   </p>
 </div>
@@ -17,7 +17,6 @@
 
 **Official repository for [BenchHub: A Unified Benchmark Suite for Holistic and Customizable LLM Evaluation](https://arxiv.org/abs/2506.00482).**
 
-[Paper (arXiv)](https://arxiv.org/abs/2506.00482) | [GitHub](https://github.com/rladmstn1714/BenchHub) | [Hugging Face (Dataset \& web)](https://huggingface.co/BenchHub)
 
 ---
 
