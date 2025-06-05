@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>BenchHub 🧪📚</h1>
+  <h1>BenchHub 📚</h1>
   <p>A Unified Benchmark Suite for Holistic and Customizable LLM Evaluation</p>
   <p>
     <a href="https://arxiv.org/abs/2506.00482">
