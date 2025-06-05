@@ -17,7 +17,7 @@
 
 **Official repository for [BenchHub: A Unified Benchmark Suite for Holistic and Customizable LLM Evaluation](https://arxiv.org/abs/2506.00482).**
 
-[Paper (arXiv)](https://arxiv.org/abs/2506.00482) | [GitHub](https://github.com/rladmstn1714/BenchHub) | [Hugging Face (code & web)](https://huggingface.co/BenchHub)
+[Paper (arXiv)](https://arxiv.org/abs/2506.00482) | [GitHub](https://github.com/rladmstn1714/BenchHub) | [Hugging Face (Dataset \& web)](https://huggingface.co/BenchHub)
 
 ---
 
