@@ -39,21 +39,21 @@ We currently support three main function for evaluation:
 1. **Flexible Benchmark Loader (`load_benchhub`)**  
    The primary interface for filtering and loading evaluation datasets.  
    Users can directly specify `skill`, `target`, and `subject` filters to construct customized evaluation subsets.
-### Example: `load_dataset` Function
+  ### Example: `load_dataset` Function
 
-You can load and filter datasets using the `load_benchhub` function. Here's how to use it:
+  You can load and filter datasets using the `load_benchhub` function. Here's how to use it:
 
-```python
-from src import load_benchhub
+  ```python
+  from src import load_benchhub
 
-df = load_benchhub(
-    lang='kor',                # Specify language (e.g., 'kor' for Korean)
-    subject=['history', 'math'],  # Filter based on subjects
-    skill='reasoning',         # Filter based on skill type
-    target='general',          # Filter based on target type
-    save='filtered_dataset.csv' # Optionally save the filtered dataset to a CSV file
-)
-```
+  df = load_benchhub(
+      lang='kor',                # Specify language (e.g., 'kor' for Korean)
+      subject=['history', 'math'],  # Filter based on subjects
+      skill='reasoning',         # Filter based on skill type
+      target='general',          # Filter based on target type
+      save='filtered_dataset.csv' # Optionally save the filtered dataset to a CSV file
+  )
+  ```
    > 🧠 Additionally, BenchHub offers an **intent classification** module that maps free-form evaluation goals (e.g., *"Evaluate understanding of Korean culture"*) to structured filters based on BenchHub's taxonomy.
 
 2. **Evaluation Execution (via HRET)**  
@@ -61,6 +61,9 @@ df = load_benchhub(
 
 3. **Citation Report Generator**  
    As BenchHub serves mixture of benchmarks, we provide automated LaTeX + BibTeX reports that document the dataset sources included in your evaluation. This supports transparent reporting in research papers.
+
+4. **Category-Wise Performance Analysis (TBA)**
+A future module will support category-wise accuracy analysis, allowing users to break down evaluation results by skill type, subject area, or benchmark source.
 
 > 📂 For full usage and code examples, see [`evaluation/README.md`](evaluation/README.md)
 

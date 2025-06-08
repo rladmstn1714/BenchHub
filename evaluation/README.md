@@ -13,7 +13,7 @@ This directory contains the core utilities for filtering, evaluating, and citing
 Load and filter evaluation subsets from BenchHub using structured metadata. This module also includes intent classification utilities for converting natural language queries into structured filters.
 
 ```python
-from evaluation import load_benchhub, classify_intent_adaptive
+from evaluation.dataset_loader import load_benchhub, classify_intent
 
 # Option 1: Load using structured filters
 df = load_benchhub(
@@ -26,7 +26,7 @@ df = load_benchhub(
 
 # Option 2: Load using natural language intent
 intent = "I want to evaluate understanding of Korean traditional food and clothing."
-parsed = classify_intent_adaptive(intent)
+parsed = classify_intent(intent)
 df = load_benchhub(
     lang='kor',
     subject=parsed['subject_labels'],
@@ -52,7 +52,7 @@ df = load_benchhub(
 Run full evaluation pipeline via HRET, including filtering, model execution, and citation. Citation generation is handled internally within this module.
 
 ```python
-from evaluation import run_benchhub_evaluation
+from evaluation.evaluate import run_benchhub_evaluation
 
 results = run_benchhub_evaluation(
     skill_type=['knowledge'],
@@ -89,7 +89,8 @@ This module is fully integrated with [HRET (Haerae Evaluation Toolkit)](https://
 ```
 evaluation/
 ├── evaluation.py            # Main pipeline and citation generator
-├── load_benchhub.py         # Dataset loader and intent classifier
+├── dataset_loader.py        # Dataset loader and intent classifier
+├── analyze.py               # TBA
 └── README.md                # You're here :)
 ```
 

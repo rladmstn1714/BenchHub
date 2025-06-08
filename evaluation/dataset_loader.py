@@ -66,7 +66,7 @@ def extract_subject_labels(classification_result):
     else:
         raise ValueError("Unexpected subject format")
 
-def classify_intent_adaptive(intent_text: str) -> dict:
+def classify_intent(intent_text: str) -> dict:
     """
     Classify evaluation intent into skill, target, and subject.
     If the intent is abstract/general, return only the coarse-grained subject.
