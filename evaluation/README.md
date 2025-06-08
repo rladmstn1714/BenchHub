@@ -50,7 +50,7 @@ df = load_benchhub(
 #### 🔹 Function: `run_benchhub_evaluation()`
 
 Run full evaluation pipeline via HRET, including filtering, model execution, and citation. Citation generation is handled internally within this module.
-<!-- 
+
 ```python
 from evaluation.evaluate import run_benchhub_evaluation
 
@@ -61,7 +61,7 @@ results = run_benchhub_evaluation(
     problem_type=['MCQA'],
     citation_path='report.tex'
 )
-``` -->
+```
 
 **Arguments:**
 

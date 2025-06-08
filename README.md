@@ -39,7 +39,7 @@ We currently support three main function for evaluation:
 1. **Flexible Benchmark Loader (`load_benchhub`)**  
    The primary interface for filtering and loading evaluation datasets.  
    Users can directly specify `skill`, `target`, and `subject` filters to construct customized evaluation subsets.
-  ### Example: `load_dataset` Function
+  <!-- ### Example: `load_dataset` Function
 
   You can load and filter datasets using the `load_benchhub` function. Here's how to use it:
 
@@ -53,7 +53,7 @@ We currently support three main function for evaluation:
       target='general',          # Filter based on target type
       save='filtered_dataset.csv' # Optionally save the filtered dataset to a CSV file
   )
-  ```
+  ``` -->
    > 🧠 Additionally, BenchHub offers an **intent classification** module that maps free-form evaluation goals (e.g., *"Evaluate understanding of Korean culture"*) to structured filters based on BenchHub's taxonomy.
 
 2. **Evaluation Execution (via HRET)**  
