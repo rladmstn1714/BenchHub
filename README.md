@@ -30,23 +30,15 @@ It enables efficient dataset handling for **training and evaluation**, providing
 
 This allows users to build **custom benchmarks** tailored to specific needs and conduct **holistic evaluations** of language models.
 
-
-
 ## 🔧 Features
 
-- 🧩 Modular loading of diverse benchmark datasets
-- 🔍 Fine-grained filtering by metadata
-- 📊 Ready-to-use evaluation interface
-- 💻 Integration with Hugging Face Hub for ease of use
+The evaluation system in `BenchHub` provides key utilities for conducting standardized LLM evaluation. 
 
+We currently support three main function for evaluation:
 
-
-### Agent-Based Reformatter
-
-* **`agents/run.py`**: An end-to-end reformatter based on an agent-driven architecture. It automates the process of reformatting datasets for model training and evaluation in a flexible, scalable manner.
-* **`agents/run_determ_github.py`**: A rule-based, LLM-guided reformatter designed specifically for datasets from GitHub. It leverages rule-based logic to process and format the data for easier analysis.
-* **`agents/run_determ.py`**: A rule-based, LLM-guided reformatter focused on datasets from Hugging Face. It applies rule-based techniques to preprocess and format Hugging Face datasets for downstream tasks.
-
+1. **Flexible Benchmark Loader (`load_benchhub`)**  
+   The primary interface for filtering and loading evaluation datasets.  
+   Users can directly specify `skill`, `target`, and `subject` filters to construct customized evaluation subsets.
 ### Example: `load_dataset` Function
 
 You can load and filter datasets using the `load_benchhub` function. Here's how to use it:
@@ -62,6 +54,22 @@ df = load_benchhub(
     save='filtered_dataset.csv' # Optionally save the filtered dataset to a CSV file
 )
 ```
+   > 🧠 Additionally, BenchHub offers an **intent classification** module that maps free-form evaluation goals (e.g., *"Evaluate understanding of Korean culture"*) to structured filters based on BenchHub's taxonomy.
+
+2. **Evaluation Execution (via HRET)**  
+   BenchHub works in conjunction with the HRET[HRET (Haerae Evaluation Toolkit)](https://github.com/HAE-RAE/haerae-evaluation-toolkit/) evaluation toolkit to support evaluations using string-matching, LLM inference, or external scoring. This collaboration ensures compatibility with broader evaluation pipelines.
+
+3. **Citation Report Generator**  
+   As BenchHub serves mixture of benchmarks, we provide automated LaTeX + BibTeX reports that document the dataset sources included in your evaluation. This supports transparent reporting in research papers.
+
+> 📂 For full usage and code examples, see [`evaluation/README.md`](evaluation/README.md)
+
+### Agent-Based Reformatter
+
+* **`agents/run.py`**: An end-to-end reformatter based on an agent-driven architecture. It automates the process of reformatting datasets for model training and evaluation in a flexible, scalable manner.
+* **`agents/run_determ_github.py`**: A rule-based, LLM-guided reformatter designed specifically for datasets from GitHub. It leverages rule-based logic to process and format the data for easier analysis.
+* **`agents/run_determ.py`**: A rule-based, LLM-guided reformatter focused on datasets from Hugging Face. It applies rule-based techniques to preprocess and format Hugging Face datasets for downstream tasks.
+
 
 ## 📝 Citation
 
