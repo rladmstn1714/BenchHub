@@ -67,6 +67,10 @@ A future module will support category-wise accuracy analysis, allowing users to 
 
 > 📂 For full usage and code examples, see [`evaluation/README.md`](evaluation/README.md)
 
+## Submit Your Dataset
+If you would like your dataset to be included in BenchHub, please submit a pull request via the "Submit your dataset" section at the following link:
+👉 https://huggingface.co/spaces/BenchHub/BenchHub
+
 ## Impelmenatation of BenchHub 
 
 BenchHub is designed to transform raw benchmarks into BenchHub-compatible formats and to automatically categorize datasets by skill, subject, and target using both rule-based and LLM-guided methods. The code for reformatting and categorization is located in the /pipeline directory, with more details available in [`pipeline/README.md`](pipeline/README.md)
