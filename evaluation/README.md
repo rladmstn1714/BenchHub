@@ -6,7 +6,7 @@ This directory contains the core utilities for filtering, evaluating, and citing
 
 ## 📦 Components
 
-### 1. `load_benchhub.py`
+### 1. `dataset_loader.py`
 
 #### 🔹 Function: `load_benchhub()`
 

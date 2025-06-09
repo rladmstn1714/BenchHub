@@ -57,7 +57,7 @@ We currently support three main function for evaluation:
    > 🧠 Additionally, BenchHub offers an **intent classification** module that maps free-form evaluation goals (e.g., *"Evaluate understanding of Korean culture"*) to structured filters based on BenchHub's taxonomy.
 
 2. **Evaluation Execution (via HRET)**  
-   BenchHub works in conjunction with the HRET[HRET (Haerae Evaluation Toolkit)](https://github.com/HAE-RAE/haerae-evaluation-toolkit/) evaluation toolkit to support evaluations using string-matching, LLM inference, or external scoring. This collaboration ensures compatibility with broader evaluation pipelines.
+   BenchHub works in conjunction with the [HRET (Haerae Evaluation Toolkit)](https://github.com/HAE-RAE/haerae-evaluation-toolkit/) evaluation toolkit to support evaluations using string-matching, LLM inference, or external scoring. This collaboration ensures compatibility with broader evaluation pipelines.
 
 3. **Citation Report Generator**  
    As BenchHub serves mixture of benchmarks, we provide automated LaTeX + BibTeX reports that document the dataset sources included in your evaluation. This supports transparent reporting in research papers.
@@ -67,11 +67,12 @@ A future module will support category-wise accuracy analysis, allowing users to 
 
 > 📂 For full usage and code examples, see [`evaluation/README.md`](evaluation/README.md)
 
-### Agent-Based Reformatter
+## Impelmenatation of BenchHub 
 
-* **`agents/run.py`**: An end-to-end reformatter based on an agent-driven architecture. It automates the process of reformatting datasets for model training and evaluation in a flexible, scalable manner.
+BenchHub is designed to transform raw benchmarks into BenchHub-compatible formats and to automatically categorize datasets by skill, subject, and target using both rule-based and LLM-guided methods. The code for reformatting and categorization is located in the /pipeline directory, with more details available in [`pipeline/README.md`](pipeline/README.md)
+<!-- * **`agents/run.py`**: An end-to-end reformatter based on an agent-driven architecture. It automates the process of reformatting datasets for model training and evaluation in a flexible, scalable manner.
 * **`agents/run_determ_github.py`**: A rule-based, LLM-guided reformatter designed specifically for datasets from GitHub. It leverages rule-based logic to process and format the data for easier analysis.
-* **`agents/run_determ.py`**: A rule-based, LLM-guided reformatter focused on datasets from Hugging Face. It applies rule-based techniques to preprocess and format Hugging Face datasets for downstream tasks.
+* **`agents/run_determ.py`**: A rule-based, LLM-guided reformatter focused on datasets from Hugging Face. It applies rule-based techniques to preprocess and format Hugging Face datasets for downstream tasks. -->
 
 
 ## 📝 Citation
