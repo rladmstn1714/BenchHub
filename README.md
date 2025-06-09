@@ -58,13 +58,13 @@ We currently support three main function for evaluation:
 
 
 2. **Evaluation Execution (via HRET)**  
-   BenchHub works in conjunction with the [HRET (Haerae Evaluation Toolkit)](https://github.com/HAE-RAE/haerae-evaluation-toolkit/) evaluation toolkit to support evaluations using string-matching, LLM inference, or external scoring. This collaboration ensures compatibility with broader evaluation pipelines.
+  - BenchHub works in conjunction with the [HRET (Haerae Evaluation Toolkit)](https://github.com/HAE-RAE/haerae-evaluation-toolkit/) evaluation toolkit to support evaluations using string-matching, LLM inference, or external scoring. This collaboration ensures compatibility with broader evaluation pipelines.
 
 3. **Citation Report Generator**  
-   As BenchHub serves mixture of benchmarks, we provide automated LaTeX + BibTeX reports that document the dataset sources included in your evaluation. This supports transparent reporting in research papers.
+  - As BenchHub serves mixture of benchmarks, we provide automated LaTeX + BibTeX reports that document the dataset sources included in your evaluation. This supports transparent reporting in research papers.
 
 4. **Category-Wise Performance Analysis (TBA)**
-A future module will support category-wise accuracy analysis, allowing users to break down evaluation results by skill type, subject area, or benchmark source.
+  - A future module will support category-wise accuracy analysis, allowing users to break down evaluation results by skill type, subject area, or benchmark source.
 
 > 📂 For full usage and code examples, see [`evaluation/README.md`](evaluation/README.md)
 
