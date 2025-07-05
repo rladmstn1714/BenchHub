@@ -11,7 +11,7 @@ def load_benchhub(lang='en', subject=None, skill=None, target=None, save=None):
     Returns a filtered pandas DataFrame.
     """
     # Hugging Face repo name
-    repo_name = f"EunsuKim/BenchHub-{lang}"
+    repo_name = f"BenchHub/BenchHub-{lang}"
     
     # Load dataset from Hugging Face Hub directly
     dataset = load_dataset(repo_name, split='train')
