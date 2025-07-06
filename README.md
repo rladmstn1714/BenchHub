@@ -29,6 +29,7 @@ It enables efficient dataset handling for **training and evaluation**, providing
 - **Target**
 
 This allows users to build **custom benchmarks** tailored to specific needs and conduct **holistic evaluations** of language models.
+![Overview](assets/benchhub_overview.png)
 
 ## 🔧 Features
 
