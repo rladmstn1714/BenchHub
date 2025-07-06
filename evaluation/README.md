@@ -84,7 +84,7 @@ df = load_benchhub(
 )
 citation_report = benchhub_citation_report(df,output_path="citation.tex") 
 ```
-#### Sample report
+#### 🔹 Sample report
 ```
 The evaluation dataset are sampled using BenchHub~\\cite{{kim2025benchhub}}. 
 %If you use hret for the evaluation, please add the following text: The evaluation is conducted using hret~\cite{{lee2025hret}}.
@@ -105,6 +105,7 @@ The individual datasets include in the evaluation set, along with their statisti
 \\end{{table}}
 
 % --- BibTeX Entries ---
+@inproceedings{...}
 ```
 ---
 
