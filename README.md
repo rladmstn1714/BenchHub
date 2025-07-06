@@ -29,6 +29,7 @@ It enables efficient dataset handling for **training and evaluation**, providing
 - **Target**
 
 This allows users to build **custom benchmarks** tailored to specific needs and conduct **holistic evaluations** of language models.
+[teaser.pdf](https://github.com/user-attachments/files/21087420/teaser.pdf)
 
 ## 🔧 Features
 
