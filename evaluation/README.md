@@ -72,6 +72,40 @@ results = run_benchhub_evaluation(
 * `citation_path`: Optional LaTeX file path to export citation report
 * `model_name`, `api_base`, etc.: Model execution configuration
 
+### 3. `benchhub_citation_report`
+#### 🔹 benchhub_citation_report
+```python
+from src.utils import benchhub_citation_report
+df = load_benchhub(
+    lang='kor',
+    subject=parsed['subject_labels'],
+    skill=parsed['skill'],
+    target=parsed['target']
+)
+citation_report = benchhub_citation_report(df,output_path="citation.tex") 
+```
+#### Sample report
+```
+The evaluation dataset are sampled using BenchHub~\\cite{{kim2025benchhub}}. 
+%If you use hret for the evaluation, please add the following text: The evaluation is conducted using hret~\cite{{lee2025hret}}.
+The individual datasets include in the evaluation set, along with their statistics, are summarized in Table~\\ref{{tab:eval-dataset}}.
+
+% Please add the following required packages to your document preamble:
+% \\usepackage{{booktabs}}
+\\begin{{table}}[h]
+\\centering
+\\begin{{tabular}}{{@{{}}ll@{{}}}}
+\\toprule
+\\textbf{{Dataset}} & \\textbf{{Number of Samples}} \\\\ \\midrule
+{table_content}
+\\bottomrule
+\\end{{tabular}}
+\\caption{{Breakdown of datasets included in the evaluation set.}}
+\\label{{tab:eval-dataset}}
+\\end{{table}}
+
+% --- BibTeX Entries ---
+```
 ---
 
 ## 🧪 Backend Evaluation
