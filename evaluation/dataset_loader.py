@@ -1,12 +1,14 @@
 from datasets import load_dataset
-import openai
-from src.descriptions import SUBJECT_HIERARCHY_WITH_DESCRIPTION
 from dotenv import load_dotenv
-import openai
+from openai import OpenAI
+import os
+import sys
+import pandas as pd
+from src.utils import benchhub_citation_report
+from src.description import SUBJECT_HIERARCHY_WITH_DESCRIPTION 
 load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
-
-openai.api_key = openai_api_key
+client = OpenAI(api_key=openai_api_key)
 def load_benchhub(lang='en', subject=None, skill=None, target=None, save=None):
     """
     lang: 'en' or 'ko'
@@ -18,32 +20,38 @@ def load_benchhub(lang='en', subject=None, skill=None, target=None, save=None):
     Returns a filtered pandas DataFrame.
     """
     # Hugging Face repo name
-    repo_name = f"EunsuKim/BenchHub-{lang}"
-    
+    repo_name = f"BenchHub/BenchHub-{lang}"
+
     # Load dataset from Hugging Face Hub directly
     dataset = load_dataset(repo_name, split='train')
     df = pd.DataFrame(dataset)
-    
     # Filter by subject: Check if any of the given subjects are contained in subject_type column
     if subject is not None and isinstance(subject, list):
         # Apply filter to subject_type based on user input
-        mask_subject = df['subject_type'].apply(
-            lambda x: any(sub in x for sub in subject)
-        )
+        mask_subject = df['subject_type'].apply(lambda x: any(sub.split('/')[-1].lower() in str(x) for sub in subject))
         df = df[mask_subject]
-    
+
     # Filter by skill: Check if skill is a substring of task_type column
     if skill is not None:
-        df = df[df['task_type'].str.contains(skill, na=False)]
-    
+        if isinstance(skill, str):
+            skill = [skill]
+        mask_skill = df['task_type'].apply(lambda x: any(sk.lower() in str(x).lower() for sk in skill))
+        df = df[mask_skill]
     # Filter by target: Check if target is a substring of target_type column
     if target is not None:
-        df = df[df['target_type'].str.contains(target, na=False)]
-    
+        if isinstance(target, str):
+            target = [target]
+        mask_target = df['target_type'].apply(lambda x: any(tag.lower() in str(x).lower().replace('cultural','local') for tag in target))
+        df = df[mask_target]
     # Save the filtered DataFrame to a CSV file
     if save:
         df.to_csv(save, index=False)
-    
+        print(f"Filtered dataset saved to {save}")
+        print(f"Number of {save} dataset: {len(df)}")
+    # Return the filtered DataFrame
+    if df.empty:
+        print("No data found with the specified filters.")
+        return pd.DataFrame()  # Return an empty DataFrame if no data matches the filters
     return df
 
 def extract_subject_labels(classification_result):
@@ -125,37 +133,44 @@ OR
 
     user_prompt = f"Evaluation intent: \"{intent_text}\""
 
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
-        messages=[
-            {"role": "system", "content": system_prompt.strip()},
-            {"role": "user", "content": user_prompt.strip()}
-        ],
-        temperature=0.0
-    )
+    response = client.chat.completions.create(model="gpt-4",
+    messages=[
+        {"role": "system", "content": system_prompt.strip()},
+        {"role": "user", "content": user_prompt.strip()}
+    ],
+    temperature=0.0)
 
-    return eval(response['choices'][0]['message']['content'])
+    response_dict = eval(response.choices[0].message.content)
+    subject_formatted = []
+    subject_formatted = extract_subject_labels(response_dict)  # Ensure subject is processed
+    response_dict['subject'] = subject_formatted
+    return response_dict
 
 if __name__ == "__main__":
-    # Assume classify_intent_multi() and SUBJECT_HIERARCHY_WITH_DESCRIPTION are already defined
+    # Assume classify_intent() and SUBJECT_HIERARCHY_WITH_DESCRIPTION are already defined
 
     # Example evaluation intent (in Korean)
     intent = "I want to evaluate Korean culture."
 
     # Step 1: Use LLM to classify the intent
-    classification = classify_intent_multi(intent)
+    classification = {'skill': ['Knowledge'], 'target': ['General'], 'subject': ['Culture']}#classify_intent(intent)
 
     # Step 2: Extract arguments for load_benchhub
     skills = classification["skill"]                # e.g., ['Knowledge']
-    targets = classification["target"]              # e.g., ['Local']
-    subjects = [s["fine"].lower() for s in classification["subject"]]  # e.g., ['food', 'clothing']
+    targets = classification["target"]          # e.g., ['Local']
+    subjects = classification["subject"]  # e.g., ['food', 'clothing']
 
     # Step 3: Load benchmark data filtered using classified info
     df = load_benchhub(
-        lang='kor',
+        lang='Ko',
         subject=subjects,
         skill=skills,
         target=targets,
         save='filtered_dataset.csv'
     )
     print(df.head())
+
+    # Step 4: Download citation report
+    benchhub_citation_report(df,"citation.txt") 
+    #benchhub_citation_report(df,"citation.tex") 
+    
