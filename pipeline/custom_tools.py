@@ -1,10 +1,11 @@
 import os
 import json
+import pandas as pd
 import random
 from datasets import load_dataset, DatasetDict, Dataset,get_dataset_config_names,get_dataset_split_names
 from typing import Optional, List, Callable
-from smolagents import tool
-from litellm import completion
+# from smolagents import tool
+# from litellm import completion
 import ast
 import re
 import difflib
@@ -18,27 +19,27 @@ judge = ChatModel.create_model(
 # -------------------------------------------
 # Agent-safe decorator
 # -------------------------------------------
-def tool_safe(func: Callable) -> Callable:
-    """
-    Smolagent tool decorator with auto docstring generator.
-    """
-    # 원본 function 가져오기
-    raw_func = func
-    if hasattr(func, "__wrapped__"):
-        raw_func = func.__wrapped__
+# def tool_safe(func: Callable) -> Callable:
+#     """
+#     Smolagent tool decorator with auto docstring generator.
+#     """
+#     # 원본 function 가져오기
+#     raw_func = func
+#     if hasattr(func, "__wrapped__"):
+#         raw_func = func.__wrapped__
 
-    if not getattr(raw_func, "__doc__", None):
-        auto_doc = generate_google_style_docstring(raw_func)
-        print(f"[tool_safe] Auto-generating docstring for '{raw_func.__name__}':\n{auto_doc}\n")
-        raw_func = set_docstring(raw_func, auto_doc)
+#     if not getattr(raw_func, "__doc__", None):
+#         auto_doc = generate_google_style_docstring(raw_func)
+#         print(f"[tool_safe] Auto-generating docstring for '{raw_func.__name__}':\n{auto_doc}\n")
+#         raw_func = set_docstring(raw_func, auto_doc)
 
-    return tool(raw_func)
+#     return tool(raw_func)
 
 # -------------------------------------------
 # Utility - Load JSONL
 # -------------------------------------------
 
-@tool_safe
+# @tool_safe
 def load_dataset_tool(path: str) -> dict:
     """
     Load dataset from JSONL file.
@@ -63,7 +64,7 @@ def load_dataset_tool(path: str) -> dict:
 # ------------------------------
 # Tool 0: Check if dataset has subsets
 # ------------------------------
-@tool_safe
+# @tool_safe
 def check_hf_dataset_subset(dataset_key: str) -> dict:
     """
     Check whether the Hugging Face dataset has subsets (configs).
@@ -184,7 +185,7 @@ def dataset_download_tool(dataset_key: str, subset: Optional[str] = None, split:
 # Step 2 - Detect problem type
 # -------------------------------------------
 
-@tool_safe
+# @tool_safe
 def detect_problem_type_tool(sample_rows: List[dict]) -> dict:
     """
     Detect problem type based on sample rows.
@@ -267,7 +268,7 @@ Sample data:
 # Step 3 : Map dataset row
 # ------------------------------
 
-@tool_safe
+# @tool_safe
 def guess_field(row: dict, candidates: list) -> Optional[str]:
     """
     Guess the field based on the candidates.
@@ -282,7 +283,7 @@ def guess_field(row: dict, candidates: list) -> Optional[str]:
             if candidate.lower() in key.lower():
                 return key
     return None
-@tool_safe
+# @tool_safe
 def extract_mcqa_options(row: dict,raw_key:List, answer_key:str,answers_list:List) -> tuple:
     """
     Extract options from the row.
@@ -362,7 +363,7 @@ def extract_mcqa_options(row: dict,raw_key:List, answer_key:str,answers_list:Lis
     return options, answer, mcqa_meta
 
 
-@tool_safe
+# @tool_safe
 def fuzzy_match(candidate: str, choices: List[str], cutoff: float = 0.6) -> Optional[str]:
     """
     Fuzzy match a candidate string against a list of choices.
@@ -376,7 +377,7 @@ def fuzzy_match(candidate: str, choices: List[str], cutoff: float = 0.6) -> Opti
     matches = difflib.get_close_matches(candidate, choices, n=1, cutoff=cutoff)
     return matches[0] if matches else None
 
-@tool_safe
+# @tool_safe
 def parse_mapping_from_string(response_raw: str, row_keys :List, valid_mapped_keys:List) -> dict:
     """
     Parse the mapping from the response string.
@@ -410,7 +411,7 @@ def parse_mapping_from_string(response_raw: str, row_keys :List, valid_mapped_ke
                     mapping[mapped_value] = key
 
     return mapping
-@tool_safe    
+# @tool_safe    
 def agent_smart_map(row: dict, problem_type: str) -> dict:
     """
     Agent-based intelligent key mapping (not value mapping)
@@ -476,7 +477,7 @@ Ouptput should be a JSON object with the mapping of keys to standardized fields.
     
     return result
 
-# @tool_safe
+# # @tool_safe
 # def map_row_tool(row: dict, problem_type: str) -> dict:
 #     """
 #     Map a raw row to standardized format.
@@ -531,7 +532,7 @@ Ouptput should be a JSON object with the mapping of keys to standardized fields.
 #             mapped["additional_info"][k] = v
 
 #     return mapped
-@tool_safe
+# @tool_safe
 def generate_mapping_schema(row: dict, problem_type: str) -> dict:
     """
     Generate a mapping schema for the given row based on the problem type.
@@ -578,7 +579,7 @@ def generate_mapping_schema(row: dict, problem_type: str) -> dict:
 
     return candidates
 
-@tool_safe
+# @tool_safe
 def map_row_with_schema(row:dict , mapping_schema:dict, problem_type:str,answers_list:List) -> dict:
     """
     Map a raw row to standardized format using a mapping schema.
@@ -629,7 +630,7 @@ def map_row_with_schema(row:dict , mapping_schema:dict, problem_type:str,answers
 # Step 4 - Reformat + Save
 # -------------------------------------------
 
-@tool_safe
+# @tool_safe
 def reformat_dataset_tool(saved_path: str, mapping_schema: dict, problem_type: str, dataset_key: str, subset: Optional[str] = None) -> dict:
     """
     Reformat dataset from JSONL and save using mapping schema.
@@ -705,7 +706,7 @@ def reformat_dataset_tool(saved_path: str, mapping_schema: dict, problem_type: s
 # Step 5 - Validate
 # -------------------------------------------
 
-@tool_safe
+# @tool_safe
 def validate_dataset_tool(path: str) -> dict:
     """
     Validate reformatted dataset JSONL.
@@ -749,7 +750,7 @@ def validate_dataset_tool(path: str) -> dict:
 # ------------------------------
 # Step 6: Save Final dataset
 # ------------------------------
-@tool_safe
+# @tool_safe
 def save_dataset_tool(reformatted_data: list, save_path: str = "reformatted_dataset.jsonl") -> dict:
     """
     Save the reformatted dataset to JSONL and return summary.
@@ -774,5 +775,4 @@ def save_dataset_tool(reformatted_data: list, save_path: str = "reformatted_data
     }
 
     return summary
-
 

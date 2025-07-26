@@ -5,10 +5,39 @@ from collections import Counter
 import importlib
 import os
 import sys
+from dataset.benchmark_info import DATASETS
+import numpy as np
+import ast
 # sys.path.append(os.path.join(os.path.dirname(__file__)))
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-from dataset.benchmark_info import DATASETS
+
+
+def uniform_2d_sample(df, x_col='tsne_0', y_col='tsne_1', n_samples=100, seed=42):
+    np.random.seed(seed)
+
+    # 1. 전체 범위
+    x_min, x_max = df[x_col].min(), df[x_col].max()
+    y_min, y_max = df[y_col].min(), df[y_col].max()
+
+    # 2. 격자 크기 (ceil로 해서 최대한 N개 채우도록)
+    grid_size = int(np.ceil(np.sqrt(n_samples)))
+    x_bins = np.linspace(x_min, x_max, grid_size + 1)
+    y_bins = np.linspace(y_min, y_max, grid_size + 1)
+
+    sampled_indices = []
+
+    # 3. 각 셀에 대해 샘플 1개
+    for i in range(grid_size):
+        for j in range(grid_size):
+            x_mask = (df[x_col] >= x_bins[i]) & (df[x_col] < x_bins[i + 1])
+            y_mask = (df[y_col] >= y_bins[j]) & (df[y_col] < y_bins[j + 1])
+            cell_df = df[x_mask & y_mask]
+
+            if not cell_df.empty:
+                sampled_indices.append(cell_df.sample(1).index[0])
+    print(f"real N :{len(sampled_indices)}")
+    return df.loc[sampled_indices].reset_index(drop=True), len(sampled_indices)
 
 def to_dataframe(self) -> pd.DataFrame:
     """

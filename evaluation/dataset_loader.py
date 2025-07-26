@@ -4,19 +4,20 @@ from openai import OpenAI
 import os
 import sys
 import pandas as pd
-from src.utils import benchhub_citation_report
+from src.utils import benchhub_citation_report, uniform_2d_sample
 from src.description import SUBJECT_HIERARCHY_WITH_DESCRIPTION 
 load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=openai_api_key)
-def load_benchhub(lang='en', subject=None, skill=None, target=None, save=None):
+
+def load_benchhub(lang='en', subject=None, skill=None, target=None, save=None, sampling=False):
     """
     lang: 'en' or 'ko'
     subject: list of str, filter if any string in subject_type contains any of these
     skill: str, filter if skill is substring in task_type
     target: str, filter if target is substring in target_type
     save: path to save filtered dataframe as CSV
-    
+    sampling: bool, if True, will sample uniformly using query embedding
     Returns a filtered pandas DataFrame.
     """
     # Hugging Face repo name
@@ -52,6 +53,27 @@ def load_benchhub(lang='en', subject=None, skill=None, target=None, save=None):
     if df.empty:
         print("No data found with the specified filters.")
         return pd.DataFrame()  # Return an empty DataFrame if no data matches the filters
+    if sampling:
+        # Sample uniformly using query embedding
+        from sentence_transformers import SentenceTransformer
+        import torch
+
+        device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        model = SentenceTransformer('all-mpnet-base-v2', device=device)
+        embeddings = model.encode(df['query'].tolist(), show_progress_bar=True)
+        df['embedding'] = embeddings.tolist()
+        df['embedding'] = df['embedding'].apply(lambda x: json.dumps(x))
+        print("Embeddings computed and saved to benchhub_embeddings.pkl")
+        # reduce 2-dimensionality using t-SNE 
+        from sklearn.manifold import TSNE
+        tsne = TSNE(n_components=2, random_state=42)
+        reduced_embeddings = tsne.fit_transform(embeddings)
+        df['tsne_x'] = reduced_embeddings[:, 0]
+        df['tsne_y'] = reduced_embeddings[:, 1]
+        df.to_pickle("benchhub_embeddings.pkl")
+        # sampling based on tsne_x and tsne_y
+        df, n_samples = uniform_2d_sample(df, x_col='tsne_x', y_col='tsne_y', n_samples=len(df))
+        print(f"Sampled {n_samples} rows.")
     return df
 
 def extract_subject_labels(classification_result):

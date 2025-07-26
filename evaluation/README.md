@@ -21,7 +21,8 @@ df = load_benchhub(
     subject=['Science/Mathematics'],
     skill='reasoning',
     target='general',
-    save='math_eval.csv'
+    save='math_eval.csv',
+    sampling= False
 )
 
 # Option 2: Load using natural language intent
@@ -42,6 +43,7 @@ df = load_benchhub(
 * `skill`: Task type (`'knowledge'`, `'reasoning'`, `'value/alignment'`)
 * `target`: Target type (`'general'` or `'local'`)
 * `save`: Optional filename to save the filtered DataFrame
+* `sampling`: Boolean. If `True`, samples uniformly using the query embedding; if `False`, returns all dataset entries that fit the above category type.
 
 ---
 
