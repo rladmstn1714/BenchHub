@@ -60,6 +60,7 @@ def save_json(path: str):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(self.to_dict(), f, ensure_ascii=False, indent=2)
 
+
 def benchhub_citation_report(df,output_path: str) -> None:
     """
     Generates a LaTeX citation report for evaluations run with the BenchHub dataset.
@@ -95,9 +96,11 @@ def benchhub_citation_report(df,output_path: str) -> None:
         benchmark_name = benchmark_info.dataset_key
         count = sample_counts.get(benchmark_name, 0)
         citation_key = benchmark_info.citation_key
+        license_ = benchmark_info.license
         if count != 0:
-            table_rows.append(f"\\cite{{{citation_key}}} & {count} \\\\")
+            table_rows.append(f"\\cite{{{citation_key}}} & {count} & {license_}\\\\")
             citation = benchmark_info.citation
+            
             references += f"\n{citation}\n"
     table_content = "\n".join(table_rows)
 
@@ -130,9 +133,9 @@ The individual datasets include in the evaluation set, along with their statisti
 % \\usepackage{{booktabs}}
 \\begin{{table}}[h]
 \\centering
-\\begin{{tabular}}{{@{{}}ll@{{}}}}
+\\begin{{tabular}}{{@{{}}lll@{{}}}}
 \\toprule
-\\textbf{{Dataset}} & \\textbf{{Number of Samples}} \\\\ \\midrule
+\\textbf{{Dataset}} & \\textbf{{Number of Samples}} & \\textbf{{License}} \\\\ \\midrule
 {table_content}
 \\bottomrule
 \\end{{tabular}}
@@ -157,3 +160,4 @@ The individual datasets include in the evaluation set, along with their statisti
     except IOError as e:
         print(f"Failed to write citation report to '{output_path}': {e}", exc_info=True)
         raise
+
