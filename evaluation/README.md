@@ -96,9 +96,9 @@ The individual datasets include in the evaluation set, along with their statisti
 % \usepackage{booktabs}
 \begin{table}[h]
 \centering
-\begin{tabular}{@{}ll@{}}
+\begin{tabular}{@{}lll@{}}
 \toprule
-\textbf{Dataset} & \textbf{Number of Samples} \\ \midrule
+\textbf{Dataset} & \textbf{Number of Samples} & \textbf{License}\\ \midrule
 {table_content}
 \bottomrule
 \end{tabular}
