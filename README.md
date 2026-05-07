@@ -81,23 +81,4 @@ BenchHub is designed to transform raw benchmarks into BenchHub-compatible format
 * **`agents/run_determ.py`**: A rule-based, LLM-guided reformatter focused on datasets from Hugging Face. It applies rule-based techniques to preprocess and format Hugging Face datasets for downstream tasks. -->
 
 
-## 📝 Citation
-
-If you use BenchHub in your research, please cite:
-
-```bibtex
-@misc{kim2025benchhub,
-      title={BenchHub: A Unified Benchmark Suite for Holistic and Customizable LLM Evaluation}, 
-      author={Eunsu Kim and Haneul Yoo and Guijin Son and Hitesh Patel and Amit Agarwal and Alice Oh},
-      year={2025},
-      eprint={2506.00482},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2506.00482}, 
-}
-```
-
-## 📫 Contact
-
-For questions or suggestions, please open an [issue](https://github.com/rladmstn1714/BenchHub/issues) or contact the authors at [kes0317@kaist.ac.kr](mailto:kes0317@kaist.ac.kr).
 
