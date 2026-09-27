@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>📚 BenchHub: A Unified Benchmark Suite for Holistic and Customizable LLM Evaluation </h1>
+  <h1>Benchmarks Are Not Atomic: Composition-Aware LLM Evaluation using BenchHub (NeurIPS E&D 2026)</h1>
   <p>
     <a href="https://arxiv.org/abs/2506.00482">
       <img src="https://img.shields.io/badge/ArXiv-BenchHub-<COLOR>" alt="Paper">
