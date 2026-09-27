@@ -14,7 +14,7 @@
 </div>
 
 
-**This is an official repository for [Benchmarks Are Not Atomic: Composition-Aware LLM Evaluation using BenchHub](https://arxiv.org/abs/2506.00482)(NeurIPS E&D 2026).**
+**This is an official repository for [Benchmarks Are Not Atomic: Composition-Aware LLM Evaluation using BenchHub](https://arxiv.org/abs/2506.00482).**
 
 
 
@@ -31,6 +31,8 @@ It enables efficient dataset handling for **training and evaluation**, providing
 This allows users to build **custom benchmarks** tailored to specific needs and conduct **holistic evaluations** of language models.
 ![Overview](assets/benchhub_overview.png)
 
+## Latest News
+[09/2026] This paper has been accepted to NeurIPS E&D track as a poster!
 
 ## 🔧 Features
 
