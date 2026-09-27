@@ -33,6 +33,7 @@ This allows users to build **custom benchmarks** tailored to specific needs and 
 
 ## Latest News
 [09/2026] This paper has been accepted to NeurIPS E&D track as a poster!
+[07/2026] This paper has been accepted to ICML CTB workshop!
 
 ## 🔧 Features
 
