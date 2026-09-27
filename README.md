@@ -14,7 +14,7 @@
 </div>
 
 
-**Official repository for [BenchHub: A Unified Benchmark Suite for Holistic and Customizable LLM Evaluation](https://arxiv.org/abs/2506.00482).**
+**Official repository for [Benchmarks Are Not Atomic: Composition-Aware LLM Evaluation using BenchHub](https://arxiv.org/abs/2506.00482).**
 
 
 
@@ -30,6 +30,7 @@ It enables efficient dataset handling for **training and evaluation**, providing
 
 This allows users to build **custom benchmarks** tailored to specific needs and conduct **holistic evaluations** of language models.
 ![Overview](assets/benchhub_overview.png)
+
 
 ## 🔧 Features
 
